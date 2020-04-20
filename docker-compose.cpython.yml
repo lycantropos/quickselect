@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  quickselect-cpython:
+    build:
+      context: .
+      args:
+        - PYTHON_IMAGE=${CPYTHON_IMAGE_NAME}
+        - PYTHON_IMAGE_VERSION=${CPYTHON_IMAGE_VERSION}
+    image: lycantropos/quickselect-cpython:0.0.0
+    volumes:
+      - ./quickselect/:/opt/quickselect/quickselect/
+      - ./tests/:/opt/quickselect/tests/
+      - ./README.md:/opt/quickselect/README.md
+      - ./requirements.txt:/opt/quickselect/requirements.txt
+      - ./requirements-tests.txt:/opt/quickselect/requirements-tests.txt
+      - ./setup.py:/opt/quickselect/setup.py
+      - ./pytest.ini:/opt/quickselect/pytest.ini
+    entrypoint: pytest
