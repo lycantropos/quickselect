@@ -68,6 +68,49 @@ def nth_smallest(sequence: MutableSequence[Domain],
                  n: int,
                  *,
                  key: Optional[Key] = None) -> Domain:
+    """
+    Returns n-th smallest element
+    and partially sorts given sequence while searching.
+
+    Time complexity:
+        best: ``O(size)``
+        average: ``O(size)``
+        worst: ``O(size ** 2)``
+    Memory complexity:
+        best: ``O(1)``
+        average: ``O(log size)``
+        worst: ``O(size)``
+
+    where ``size = len(sequence)``.
+
+    :param sequence: sequence to search in
+    :param n:
+        index of the element to search for
+        in the sequence sorted by key in ascending order
+        (e.g. ``n = 0`` corresponds to the minimum element)
+    :param key:
+        a single argument ordering function,
+        if none is specified compares elements themselves
+    :returns: n-th smallest element of the sequence
+
+    >>> sequence = list(range(-10, 11))
+    >>> nth_smallest(sequence, 0)
+    -10
+    >>> nth_smallest(sequence, 1)
+    -9
+    >>> nth_smallest(sequence, 19)
+    9
+    >>> nth_smallest(sequence, 20)
+    10
+    >>> nth_smallest(sequence, 0, key=abs)
+    0
+    >>> nth_smallest(sequence, 1, key=abs)
+    1
+    >>> nth_smallest(sequence, 19, key=abs)
+    -10
+    >>> nth_smallest(sequence, 20, key=abs)
+    10
+    """
     return _select(sequence, n, 0, len(sequence) - 1, key, lt)
 
 
