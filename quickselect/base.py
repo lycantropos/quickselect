@@ -1,13 +1,11 @@
 from operator import (gt,
                       lt)
-from typing import (Any,
-                    Callable,
+from typing import (Callable,
                     MutableSequence,
-                    Optional,
-                    TypeVar)
+                    Optional)
 
-Domain = TypeVar('Domain')
-Key = Callable[[Domain], Any]
+from .hints import (Domain,
+                    Key)
 
 
 def nth_largest(elements: MutableSequence[Domain],
