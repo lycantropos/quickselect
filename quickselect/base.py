@@ -60,7 +60,9 @@ def nth_largest(sequence: MutableSequence[Domain],
     >>> nth_largest(sequence, 20, key=abs)
     0
     """
-    return _select(sequence, n, 0, len(sequence) - 1, key, gt)
+    return select(sequence, n,
+                  key=key,
+                  comparator=gt)
 
 
 def nth_smallest(sequence: MutableSequence[Domain],
@@ -109,15 +111,20 @@ def nth_smallest(sequence: MutableSequence[Domain],
     >>> nth_smallest(sequence, 20, key=abs)
     10
     """
-    return _select(sequence, n, 0, len(sequence) - 1, key, lt)
+    return select(sequence, n,
+                  key=key,
+                  comparator=lt)
 
 
-def _select(sequence: MutableSequence[Domain],
-            n: int,
-            start: int,
-            stop: int,
-            key: Optional[Key],
-            comparator: Callable[[Domain, Domain], bool]):
+def select(sequence: MutableSequence[Domain],
+           n: int,
+           *,
+           start: int = 0,
+           stop: Optional[int] = None,
+           key: Optional[Key] = None,
+           comparator: Callable[[Domain, Domain], bool]) -> Domain:
+    if stop is None:
+        stop = len(sequence) - 1
     while True:
         pivot_index = _partition(sequence, start, stop, key, comparator)
         if pivot_index < n:
