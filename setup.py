@@ -27,5 +27,4 @@ setup(name=quickselect.__name__,
       license='MIT License',
       url=project_base_url,
       download_url=project_base_url + 'archive/master.zip',
-      python_requires='>=3.5',
-      install_requires=Path('requirements.txt').read_text(encoding='utf-8'))
+      python_requires='>=3.5')

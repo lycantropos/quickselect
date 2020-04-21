@@ -12,7 +12,6 @@ services:
       - ./quickselect/:/opt/quickselect/quickselect/
       - ./tests/:/opt/quickselect/tests/
       - ./README.md:/opt/quickselect/README.md
-      - ./requirements.txt:/opt/quickselect/requirements.txt
       - ./requirements-tests.txt:/opt/quickselect/requirements-tests.txt
       - ./setup.py:/opt/quickselect/setup.py
       - ./pytest.ini:/opt/quickselect/pytest.ini

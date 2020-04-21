@@ -41,8 +41,6 @@ jobs:
         displayName: 'Install packaging tools'
       - script: python -m pip install --upgrade codecov
         displayName: 'Install codecov'
-      - script: python -m pip install --force-reinstall -r requirements.txt
-        displayName: 'Install requirements'
       - script: python -m pip install --force-reinstall -r requirements-tests.txt
         displayName: 'Install tests requirements'
       - script: pytest
@@ -79,8 +77,6 @@ jobs:
         displayName: 'Install packaging tools'
       - script: python -m pip install --upgrade codecov
         displayName: 'Install codecov'
-      - script: python -m pip install --force-reinstall -r requirements.txt
-        displayName: 'Install requirements'
       - script: python -m pip install --force-reinstall -r requirements-tests.txt
         displayName: 'Install tests requirements'
       - script: pytest
