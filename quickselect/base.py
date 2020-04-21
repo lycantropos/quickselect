@@ -10,7 +10,8 @@ from typing import (Callable,
                     MutableSequence,
                     Optional)
 
-from .hints import (Domain,
+from .hints import (Comparator,
+                    Domain,
                     Key)
 
 
@@ -122,7 +123,7 @@ def select(sequence: MutableSequence[Domain],
            start: int = 0,
            stop: Optional[int] = None,
            key: Optional[Key] = None,
-           comparator: Callable[[Domain, Domain], bool]) -> Domain:
+           comparator: Comparator) -> Domain:
     """
     Partially sorts given sequence and returns n-th element.
 
