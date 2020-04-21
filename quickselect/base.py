@@ -1,3 +1,9 @@
+"""
+Based on quickselect algorithm by Tony Hoare.
+
+Reference:
+    https://en.wikipedia.org/wiki/Quickselect
+"""
 from operator import (gt,
                       lt)
 from typing import (Callable,
