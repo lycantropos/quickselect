@@ -22,14 +22,13 @@ def nth_largest(sequence: MutableSequence[Domain],
     Returns n-th largest element
     and partially sorts given sequence while searching.
 
-    Time complexity:
-        best: ``O(size)``
-        average: ``O(size)``
-        worst: ``O(size ** 2)``
-    Memory complexity:
-        best: ``O(1)``
-        average: ``O(log size)``
-        worst: ``O(size)``
+    +------------+-------------+-----------------+------------------+
+    | complexity |    best     |     average     |      worst       |
+    +------------+-------------+-----------------+------------------+
+    |    time    | ``O(size)`` |   ``O(size)``   | ``O(size ** 2)`` |
+    +------------+-------------+-----------------+------------------+
+    |   memory   |  ``O(1)``   | ``O(log size)`` |   ``O(size)``    |
+    +------------+-------------+-----------------+------------------+
 
     where ``size = len(sequence)``.
 
@@ -72,14 +71,13 @@ def nth_smallest(sequence: MutableSequence[Domain],
     Returns n-th smallest element
     and partially sorts given sequence while searching.
 
-    Time complexity:
-        best: ``O(size)``
-        average: ``O(size)``
-        worst: ``O(size ** 2)``
-    Memory complexity:
-        best: ``O(1)``
-        average: ``O(log size)``
-        worst: ``O(size)``
+    +------------+-------------+-----------------+------------------+
+    | complexity |    best     |     average     |      worst       |
+    +------------+-------------+-----------------+------------------+
+    |    time    | ``O(size)`` |   ``O(size)``   | ``O(size ** 2)`` |
+    +------------+-------------+-----------------+------------------+
+    |   memory   |  ``O(1)``   | ``O(log size)`` |   ``O(size)``    |
+    +------------+-------------+-----------------+------------------+
 
     where ``size = len(sequence)``.
 
