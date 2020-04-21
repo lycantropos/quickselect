@@ -1,6 +1,8 @@
 from decimal import Decimal
 from fractions import Fraction
 from functools import partial
+from operator import (gt,
+                      lt)
 from typing import (List,
                     Tuple)
 
@@ -30,11 +32,24 @@ def to_numbers_lists_with_index(elements: List[Domain]
                              strategies.integers(0, len(elements) - 1))
 
 
+def to_numbers_lists_with_indices_triplet(
+        elements: List[Domain]) -> Strategy[Tuple[List[Domain],
+                                                  Tuple[int, int, int]]]:
+    return strategies.tuples(
+            strategies.just(elements),
+            strategies.lists(strategies.integers(0, len(elements) - 1),
+                             min_size=3,
+                             max_size=3).map(sorted).map(tuple))
+
+
 elements_lists_with_index = elements_lists.flatmap(to_numbers_lists_with_index)
+elements_lists_with_indices_triplets = (
+    elements_lists.flatmap(to_numbers_lists_with_indices_triplet))
 
 
 def identity(value: Domain) -> Domain:
     return value
 
 
+comparators = strategies.sampled_from([gt, lt])
 keys = strategies.sampled_from([identity, abs]) | strategies.none()
