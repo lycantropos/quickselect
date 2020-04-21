@@ -18,6 +18,49 @@ def nth_largest(sequence: MutableSequence[Domain],
                 n: int,
                 *,
                 key: Optional[Key] = None) -> Domain:
+    """
+    Returns n-th largest element
+    and partially sorts given sequence while searching.
+
+    Time complexity:
+        best: ``O(size)``
+        average: ``O(size)``
+        worst: ``O(size ** 2)``
+    Memory complexity:
+        best: ``O(1)``
+        average: ``O(log size)``
+        worst: ``O(size)``
+
+    where ``size = len(sequence)``.
+
+    :param sequence: sequence to search in
+    :param n:
+        index of the element to search for
+        in the sequence sorted by key in descending order
+        (e.g. ``n = 0`` corresponds to the maximum element)
+    :param key:
+        a single argument ordering function,
+        if none is specified compares elements themselves
+    :returns: n-th largest element of the sequence
+
+    >>> sequence = list(range(-10, 11))
+    >>> nth_largest(sequence, 0)
+    10
+    >>> nth_largest(sequence, 1)
+    9
+    >>> nth_largest(sequence, 19)
+    -9
+    >>> nth_largest(sequence, 20)
+    -10
+    >>> nth_largest(sequence, 0, key=abs)
+    10
+    >>> nth_largest(sequence, 1, key=abs)
+    -10
+    >>> nth_largest(sequence, 19, key=abs)
+    1
+    >>> nth_largest(sequence, 20, key=abs)
+    0
+    """
     return _select(sequence, n, 0, len(sequence) - 1, key, gt)
 
 
