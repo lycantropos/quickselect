@@ -87,7 +87,7 @@ def nth_smallest(sequence: MutableSequence[Domain],
         in the sequence sorted by key in ascending order
         (e.g. ``n = 0`` corresponds to the minimum element)
     :param key:
-        a single argument ordering function,
+        single argument ordering function,
         if none is specified compares elements themselves
     :returns: n-th smallest element of the sequence
 
