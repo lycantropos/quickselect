@@ -123,6 +123,48 @@ def select(sequence: MutableSequence[Domain],
            stop: Optional[int] = None,
            key: Optional[Key] = None,
            comparator: Callable[[Domain, Domain], bool]) -> Domain:
+    """
+    Partially sorts given sequence and returns n-th element.
+
+    +------------+-------------+-----------------+------------------+
+    | complexity |    best     |     average     |      worst       |
+    +------------+-------------+-----------------+------------------+
+    |    time    | ``O(size)`` |   ``O(size)``   | ``O(size ** 2)`` |
+    +------------+-------------+-----------------+------------------+
+    |   memory   |  ``O(1)``   | ``O(log size)`` |   ``O(size)``    |
+    +------------+-------------+-----------------+------------------+
+
+    where ``size = len(sequence)``.
+
+    :param sequence: sequence to select from
+    :param n: index of the element to select
+    :param start: index to start selection from
+    :param stop: index to stop selection at
+    :param key:
+        single argument ordering function,
+        if none is specified compares elements themselves
+    :param comparator:
+        binary predicate that defines the sorting order
+    :returns:
+        n-th element of the sequence
+        with slice partially sorted by key in given order
+
+
+    >>> from operator import gt, lt
+    >>> sequence = list(range(-10, 11))
+    >>> select(sequence, 0, stop=5, comparator=gt)
+    -5
+    >>> select(sequence, 0, stop=5, comparator=lt)
+    -10
+    >>> select(sequence, 20, start=15, comparator=lt)
+    10
+    >>> select(sequence, 20, start=15, comparator=gt)
+    5
+    >>> select(sequence, 5, start=5, stop=15, key=abs, comparator=lt)
+    0
+    >>> select(sequence, 5, start=5, stop=15, key=abs, comparator=gt)
+    10
+    """
     if stop is None:
         stop = len(sequence) - 1
     while True:
