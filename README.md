@@ -70,11 +70,11 @@ Usage
 -----
 ```python
 >>> from quickselect.base import nth_largest
->>> elements = list(range(-100, 101))
->>> nth_largest(elements, 0, key=abs) == max(elements, key=abs)
+>>> sequence = list(range(-100, 101))
+>>> nth_largest(sequence, 0, key=abs) == max(sequence, key=abs)
 True
 >>> from quickselect.base import nth_smallest
->>> nth_smallest(elements, 0, key=abs) == min(elements, key=abs)
+>>> nth_smallest(sequence, 0, key=abs) == min(sequence, key=abs)
 True
 
 ```
