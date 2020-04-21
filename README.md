@@ -66,6 +66,19 @@ Install:
   pypy setup.py install
   ```
 
+Usage
+-----
+```python
+>>> from quickselect.base import nth_largest
+>>> elements = list(range(-100, 101))
+>>> nth_largest(elements, 0, key=abs) == max(elements, key=abs)
+True
+>>> from quickselect.base import nth_smallest
+>>> nth_smallest(elements, 0, key=abs) == min(elements, key=abs)
+True
+
+```
+
 Development
 -----------
 
