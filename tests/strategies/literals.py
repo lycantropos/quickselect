@@ -1,7 +1,6 @@
 from decimal import Decimal
 from fractions import Fraction
 from functools import partial
-from numbers import Real
 from typing import (List,
                     Tuple)
 
@@ -38,8 +37,4 @@ def identity(value: Domain) -> Domain:
     return value
 
 
-def square(number: Real) -> Real:
-    return number * number
-
-
-keys = strategies.sampled_from([identity, abs, square]) | strategies.none()
+keys = strategies.sampled_from([identity, abs]) | strategies.none()
