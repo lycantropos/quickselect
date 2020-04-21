@@ -52,11 +52,10 @@ def _partition(elements: MutableSequence[Domain],
             start += 1
         while comparator(pivot, keys[stop]):
             stop -= 1
-        if start >= stop:
-            break
         if keys[start] == keys[stop]:
             start += 1
-            continue
+        if start >= stop:
+            break
         elements[start], elements[stop] = elements[stop], elements[start]
     return stop
 
