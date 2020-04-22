@@ -1,5 +1,5 @@
 """
-Based on quickselect algorithm by Tony Hoare.
+Based on "quickselect" selection algorithm by Tony Hoare.
 
 Reference:
     https://en.wikipedia.org/wiki/Quickselect
