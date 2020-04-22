@@ -9,5 +9,8 @@ Welcome to quickselect's documentation!
    it should be considered as implementation detail
    that can change and should not be relied upon.
 
-.. automodule:: quickselect.base
+hoare module
+============
+
+.. automodule:: quickselect.hoare
     :members:
