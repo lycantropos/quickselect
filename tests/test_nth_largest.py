@@ -3,7 +3,7 @@ from typing import (MutableSequence,
 
 from hypothesis import given
 
-from quickselect.base import nth_largest
+from quickselect.hoare import nth_largest
 from quickselect.hints import (Domain,
                                Key)
 from . import strategies

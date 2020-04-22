@@ -4,7 +4,7 @@ from typing import (MutableSequence,
 
 from hypothesis import given
 
-from quickselect.base import select
+from quickselect.hoare import select
 from quickselect.hints import (Comparator,
                                Domain,
                                Key)
