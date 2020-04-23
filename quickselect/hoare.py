@@ -12,6 +12,7 @@ from typing import (Any,
                     Optional,
                     Sequence)
 
+from .core.utils import SequenceKeyView as _SequenceKeyView
 from .hints import (Comparator,
                     Domain,
                     Key)
@@ -200,12 +201,3 @@ def _partition(sequence: MutableSequence[Domain],
             break
         sequence[start], sequence[stop] = sequence[stop], sequence[start]
     return stop
-
-
-class _SequenceKeyView:
-    def __init__(self, sequence: MutableSequence[Domain], key: Key) -> None:
-        self.sequence = sequence
-        self.key = key
-
-    def __getitem__(self, index: int) -> Domain:
-        return self.key(self.sequence[index])
