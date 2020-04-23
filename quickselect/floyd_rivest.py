@@ -57,11 +57,11 @@ def nth_largest(sequence: MutableSequence[Domain],
     >>> nth_largest(sequence, 20)
     -10
     >>> nth_largest(sequence, 0, key=abs)
-    10
+    -10
     >>> nth_largest(sequence, 1, key=abs)
     -10
     >>> nth_largest(sequence, 19, key=abs)
-    1
+    -1
     >>> nth_largest(sequence, 20, key=abs)
     0
     """
@@ -110,7 +110,7 @@ def nth_smallest(sequence: MutableSequence[Domain],
     >>> nth_smallest(sequence, 0, key=abs)
     0
     >>> nth_smallest(sequence, 1, key=abs)
-    1
+    -1
     >>> nth_smallest(sequence, 19, key=abs)
     -10
     >>> nth_smallest(sequence, 20, key=abs)
