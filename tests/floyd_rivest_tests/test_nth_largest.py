@@ -3,9 +3,9 @@ from typing import (MutableSequence,
 
 from hypothesis import given
 
+from quickselect.floyd_rivest import nth_largest
 from quickselect.hints import (Domain,
                                Key)
-from quickselect.floyd_rivest import nth_largest
 from tests import strategies
 
 
