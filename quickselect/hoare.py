@@ -6,9 +6,11 @@ Reference:
 """
 from operator import (gt,
                       lt)
-from typing import (Callable,
+from typing import (Any,
+                    Callable,
                     MutableSequence,
-                    Optional)
+                    Optional,
+                    Sequence)
 
 from .hints import (Comparator,
                     Domain,
@@ -168,8 +170,11 @@ def select(sequence: MutableSequence[Domain],
     """
     if stop is None:
         stop = len(sequence) - 1
+    keys = (sequence
+            if key is None
+            else _SequenceKeyView(sequence, key))
     while True:
-        pivot_index = _partition(sequence, start, stop, key, comparator)
+        pivot_index = _partition(sequence, keys, start, stop, comparator)
         if pivot_index < n:
             start = pivot_index + 1
         elif pivot_index > n:
@@ -179,13 +184,10 @@ def select(sequence: MutableSequence[Domain],
 
 
 def _partition(sequence: MutableSequence[Domain],
+               keys: Sequence[Any],
                start: int,
                stop: int,
-               key: Optional[Key],
                comparator: Callable[[Domain, Domain], bool]) -> int:
-    keys = (sequence
-            if key is None
-            else _SequenceKeyView(sequence, key))
     pivot = keys[(start + stop) // 2]
     while start <= stop:
         while comparator(keys[start], pivot):
