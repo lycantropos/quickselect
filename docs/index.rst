@@ -9,6 +9,12 @@ Welcome to quickselect's documentation!
    it should be considered as implementation detail
    that can change and should not be relied upon.
 
+floyd_rivest module
+===================
+
+.. automodule:: quickselect.floyd_rivest
+    :members:
+
 hoare module
 ============
 
