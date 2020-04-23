@@ -3,10 +3,10 @@ from typing import (MutableSequence,
 
 from hypothesis import given
 
-from quickselect.hoare import nth_smallest
 from quickselect.hints import (Domain,
                                Key)
-from . import strategies
+from quickselect.hoare import nth_smallest
+from tests import strategies
 
 
 @given(strategies.elements_lists_with_index, strategies.keys)

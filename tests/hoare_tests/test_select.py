@@ -4,11 +4,11 @@ from typing import (MutableSequence,
 
 from hypothesis import given
 
-from quickselect.hoare import select
 from quickselect.hints import (Comparator,
                                Domain,
                                Key)
-from . import strategies
+from quickselect.hoare import select
+from tests import strategies
 
 
 @given(strategies.elements_lists_with_indices_triplets, strategies.keys,
