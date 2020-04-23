@@ -70,12 +70,15 @@ Install:
 Usage
 -----
 ```python
->>> from quickselect.hoare import nth_largest
+>>> from quickselect import floyd_rivest, hoare
 >>> sequence = list(range(-100, 101))
->>> nth_largest(sequence, 0, key=abs) == max(sequence, key=abs)
+>>> (floyd_rivest.nth_largest(sequence, 0, key=abs)
+...  == hoare.nth_largest(sequence, 0, key=abs)
+...  == max(sequence, key=abs))
 True
->>> from quickselect.hoare import nth_smallest
->>> nth_smallest(sequence, 0, key=abs) == min(sequence, key=abs)
+>>> (floyd_rivest.nth_smallest(sequence, 0, key=abs)
+...  == hoare.nth_smallest(sequence, 0, key=abs)
+...  == min(sequence, key=abs))
 True
 
 ```
