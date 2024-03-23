@@ -4,25 +4,23 @@ Based on selection algorithm by Robert W. Floyd and Ronald L. Rivest.
 Reference:
     https://en.wikipedia.org/wiki/Floyd%E2%80%93Rivest_algorithm
 """
+
+from __future__ import annotations
+
 import math
-from operator import (gt,
-                      lt)
-from typing import (Any,
-                    Callable,
-                    MutableSequence,
-                    Optional,
-                    Sequence)
+from operator import gt, lt
+from typing import Any, Callable, MutableSequence, Sequence
 
 from .core.utils import SequenceKeyView as _SequenceKeyView
-from .hints import (Comparator,
-                    Domain,
-                    Key)
+from .hints import Comparator, Domain, Key
 
 
-def nth_largest(sequence: MutableSequence[Domain],
-                n: int,
-                *,
-                key: Optional[Key] = None) -> Domain:
+def nth_largest(
+    sequence: MutableSequence[Domain],
+    n: int,
+    *,
+    key: Key[Domain] | None = None,
+) -> Domain:
     """
     Returns n-th largest element
     and partially sorts given sequence while searching.
@@ -65,15 +63,15 @@ def nth_largest(sequence: MutableSequence[Domain],
     >>> nth_largest(sequence, 20, key=abs)
     0
     """
-    return select(sequence, n,
-                  key=key,
-                  comparator=gt)
+    return select(sequence, n, key=key, comparator=gt)
 
 
-def nth_smallest(sequence: MutableSequence[Domain],
-                 n: int,
-                 *,
-                 key: Optional[Key] = None) -> Domain:
+def nth_smallest(
+    sequence: MutableSequence[Domain],
+    n: int,
+    *,
+    key: Key[Domain] | None = None,
+) -> Domain:
     """
     Returns n-th smallest element
     and partially sorts given sequence while searching.
@@ -96,7 +94,7 @@ def nth_smallest(sequence: MutableSequence[Domain],
     :param key:
         single argument ordering function,
         if none is specified compares elements themselves
-    :returns: n-th smallest element of the sequence
+    :returns: the n-th smallest element of the sequence
 
     >>> sequence = list(range(-10, 11))
     >>> nth_smallest(sequence, 0)
@@ -116,18 +114,18 @@ def nth_smallest(sequence: MutableSequence[Domain],
     >>> nth_smallest(sequence, 20, key=abs)
     10
     """
-    return select(sequence, n,
-                  key=key,
-                  comparator=lt)
+    return select(sequence, n, key=key, comparator=lt)
 
 
-def select(sequence: MutableSequence[Domain],
-           n: int,
-           *,
-           start: int = 0,
-           stop: Optional[int] = None,
-           key: Optional[Key] = None,
-           comparator: Comparator) -> Domain:
+def select(
+    sequence: MutableSequence[Domain],
+    n: int,
+    *,
+    start: int = 0,
+    stop: int | None = None,
+    key: Key[Domain] | None = None,
+    comparator: Comparator,
+) -> Domain:
     """
     Partially sorts given sequence and returns n-th element.
 
@@ -172,44 +170,59 @@ def select(sequence: MutableSequence[Domain],
     """
     if stop is None:
         stop = len(sequence) - 1
-    keys = (sequence
-            if key is None
-            else _SequenceKeyView(sequence, key))
+    keys = sequence if key is None else _SequenceKeyView(sequence, key)
     _presort(sequence, keys, n, start, stop, comparator)
     return sequence[n]
 
 
-def _presort(sequence: MutableSequence[Domain],
-             keys: Sequence[Any],
-             n: int,
-             start: int,
-             stop: int,
-             comparator: Comparator) -> None:
+def _presort(
+    sequence: MutableSequence[Domain],
+    keys: Sequence[Any],
+    n: int,
+    start: int,
+    stop: int,
+    comparator: Comparator,
+) -> None:
     candidate, pivot = sequence[n], keys[n]
     while start < stop:
         if stop - start > 600:
             range_size = stop - start + 1
             i, s = n - start + 1, 0.5 * range_size ** (2 / 3)
-            sigma = (0.5 * math.sqrt(math.log(range_size) * s
-                                     * (range_size - s) / range_size)
-                     * (-1 if i < range_size / 2 else 1))
-            _presort(sequence, keys, n,
-                     max(start, math.floor(n - i * s / range_size + sigma)),
-                     min(stop, math.floor(n + (range_size - i) * s / range_size
-                                          + sigma)),
-                     comparator)
+            sigma = (
+                0.5
+                * math.sqrt(
+                    math.log(range_size) * s * (range_size - s) / range_size
+                )
+                * (-1 if i < range_size / 2 else 1)
+            )
+            _presort(
+                sequence,
+                keys,
+                n,
+                max(start, math.floor(n - i * s / range_size + sigma)),
+                min(
+                    stop,
+                    math.floor(n + (range_size - i) * s / range_size + sigma),
+                ),
+                comparator,
+            )
         sequence[start], sequence[n] = candidate, sequence[start]
         if comparator(pivot, keys[stop]):
             sequence[start], sequence[stop] = sequence[stop], candidate
-        pivot_index = _partition(sequence, keys, pivot, start, stop,
-                                 comparator)
+        pivot_index = _partition(
+            sequence, keys, pivot, start, stop, comparator
+        )
         if keys[start] == pivot:
-            sequence[start], sequence[pivot_index] = (sequence[pivot_index],
-                                                      sequence[start])
+            sequence[start], sequence[pivot_index] = (
+                sequence[pivot_index],
+                sequence[start],
+            )
         else:
             pivot_index += 1
-            sequence[stop], sequence[pivot_index] = (sequence[pivot_index],
-                                                     sequence[stop])
+            sequence[stop], sequence[pivot_index] = (
+                sequence[pivot_index],
+                sequence[stop],
+            )
         if pivot_index <= n:
             start = pivot_index + 1
         if pivot_index >= n:
@@ -217,12 +230,14 @@ def _presort(sequence: MutableSequence[Domain],
         candidate, pivot = sequence[n], keys[n]
 
 
-def _partition(sequence: MutableSequence[Domain],
-               keys: Sequence[Any],
-               pivot: Domain,
-               start: int,
-               stop: int,
-               comparator: Callable[[Domain, Domain], bool]) -> int:
+def _partition(
+    sequence: MutableSequence[Domain],
+    keys: Sequence[Any],
+    pivot: Domain,
+    start: int,
+    stop: int,
+    comparator: Callable[[Domain, Domain], bool],
+) -> int:
     while start < stop:
         sequence[start], sequence[stop] = sequence[stop], sequence[start]
         start += 1

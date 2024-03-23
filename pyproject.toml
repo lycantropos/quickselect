@@ -17,7 +17,9 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy"
 ]
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "typing-extensions>=4.10.0",
+]
 dynamic = ["version"]
 
 [project.optional-dependencies]
@@ -41,6 +43,40 @@ strict = true
 
 [tool.pytest.ini_options]
 addopts = "--verbose -s --hypothesis-profile=default"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "single"
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+preview = true
+select = [
+    # flake8-bugbear
+    "B",
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # isort
+    "I",
+    # flake8-simplify
+    "SIM",
+    # pyupgrade
+    "UP",
+]
+ignore = [
+    "E203", # Whitespace before ':'
+]
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+known-local-folder = ["tests"]
+relative-imports-order = "closest-to-furthest"
+split-on-trailing-comma = false
 
 [tool.setuptools.dynamic]
 version = { attr = "quickselect.__version__" }

@@ -4,24 +4,22 @@ Based on "quickselect" selection algorithm by Tony Hoare.
 Reference:
     https://en.wikipedia.org/wiki/Quickselect
 """
-from operator import (gt,
-                      lt)
-from typing import (Any,
-                    Callable,
-                    MutableSequence,
-                    Optional,
-                    Sequence)
+
+from __future__ import annotations
+
+from operator import gt, lt
+from typing import Any, Callable, MutableSequence, Sequence
 
 from .core.utils import SequenceKeyView as _SequenceKeyView
-from .hints import (Comparator,
-                    Domain,
-                    Key)
+from .hints import Comparator, Domain, Key
 
 
-def nth_largest(sequence: MutableSequence[Domain],
-                n: int,
-                *,
-                key: Optional[Key] = None) -> Domain:
+def nth_largest(
+    sequence: MutableSequence[Domain],
+    n: int,
+    *,
+    key: Key[Domain] | None = None,
+) -> Domain:
     """
     Returns n-th largest element
     and partially sorts given sequence while searching.
@@ -64,15 +62,15 @@ def nth_largest(sequence: MutableSequence[Domain],
     >>> nth_largest(sequence, 20, key=abs)
     0
     """
-    return select(sequence, n,
-                  key=key,
-                  comparator=gt)
+    return select(sequence, n, key=key, comparator=gt)
 
 
-def nth_smallest(sequence: MutableSequence[Domain],
-                 n: int,
-                 *,
-                 key: Optional[Key] = None) -> Domain:
+def nth_smallest(
+    sequence: MutableSequence[Domain],
+    n: int,
+    *,
+    key: Key[Domain] | None = None,
+) -> Domain:
     """
     Returns n-th smallest element
     and partially sorts given sequence while searching.
@@ -115,18 +113,18 @@ def nth_smallest(sequence: MutableSequence[Domain],
     >>> nth_smallest(sequence, 20, key=abs)
     10
     """
-    return select(sequence, n,
-                  key=key,
-                  comparator=lt)
+    return select(sequence, n, key=key, comparator=lt)
 
 
-def select(sequence: MutableSequence[Domain],
-           n: int,
-           *,
-           start: int = 0,
-           stop: Optional[int] = None,
-           key: Optional[Key] = None,
-           comparator: Comparator) -> Domain:
+def select(
+    sequence: MutableSequence[Domain],
+    n: int,
+    *,
+    start: int = 0,
+    stop: int | None = None,
+    key: Key[Domain] | None = None,
+    comparator: Comparator,
+) -> Domain:
     """
     Partially sorts given sequence and returns n-th element.
 
@@ -171,9 +169,7 @@ def select(sequence: MutableSequence[Domain],
     """
     if stop is None:
         stop = len(sequence) - 1
-    keys = (sequence
-            if key is None
-            else _SequenceKeyView(sequence, key))
+    keys = sequence if key is None else _SequenceKeyView(sequence, key)
     while True:
         pivot_index = _partition(sequence, keys, start, stop, comparator)
         if pivot_index < n:
@@ -184,11 +180,13 @@ def select(sequence: MutableSequence[Domain],
             return sequence[n]
 
 
-def _partition(sequence: MutableSequence[Domain],
-               keys: Sequence[Any],
-               start: int,
-               stop: int,
-               comparator: Callable[[Domain, Domain], bool]) -> int:
+def _partition(
+    sequence: MutableSequence[Domain],
+    keys: Sequence[Any],
+    start: int,
+    stop: int,
+    comparator: Callable[[Domain, Domain], bool],
+) -> int:
     pivot = keys[(start + stop) // 2]
     while start <= stop:
         while comparator(keys[start], pivot):
