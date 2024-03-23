@@ -5,14 +5,13 @@ services:
     build:
       context: .
       args:
-        - PYTHON_IMAGE=${PYPY_IMAGE_NAME}
-        - PYTHON_IMAGE_VERSION=${PYPY_IMAGE_VERSION}
+        - IMAGE_NAME=${PYPY_IMAGE_NAME}
+        - IMAGE_VERSION=${PYPY_IMAGE_VERSION}
     image: lycantropos/quickselect-pypy:0.2.0
     volumes:
-      - ./quickselect/:/opt/quickselect/quickselect/
-      - ./tests/:/opt/quickselect/tests/
+      - ./pyproject.toml:/opt/quickselect/pyproject.toml
+      - ./quickselect:/opt/quickselect/quickselect
       - ./README.md:/opt/quickselect/README.md
-      - ./requirements-tests.txt:/opt/quickselect/requirements-tests.txt
       - ./setup.py:/opt/quickselect/setup.py
-      - ./pytest.ini:/opt/quickselect/pytest.ini
+      - ./tests:/opt/quickselect/tests
     entrypoint: pytest

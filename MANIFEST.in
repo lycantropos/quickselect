@@ -1,0 +1,3 @@
+include LICENSE
+include quickselect/py.typed
+recursive-include quickselect *.pyi
