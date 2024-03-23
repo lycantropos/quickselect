@@ -1,5 +1,5 @@
-from typing import Any, Callable, TypeVar
+import typing as _t
 
-Domain = TypeVar('Domain')
-Key = Callable[[Domain], Any]
-Comparator = Callable[[Any, Any], bool]
+Domain = _t.TypeVar('Domain')
+Key = _t.Callable[[Domain], _t.Any]
+Comparator = _t.Callable[[_t.Any, _t.Any], bool]

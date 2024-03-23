@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 from operator import gt
-from typing import MutableSequence, Tuple
+from typing import Any, MutableSequence
 
 from hypothesis import given
 
-from quickselect.hints import Comparator, Domain, KeyFunction
+from quickselect.hints import Comparator, Key
 from quickselect.hoare import select
 
 from tests import strategies
@@ -15,10 +17,8 @@ from tests import strategies
     strategies.comparators,
 )
 def test_properties(
-    elements_with_indices: Tuple[
-        MutableSequence[Domain], Tuple[int, int, int]
-    ],
-    key: KeyFunction,
+    elements_with_indices: tuple[MutableSequence[Any], tuple[int, int, int]],
+    key: Key[Any] | None,
     comparator: Comparator,
 ) -> None:
     elements, (start, index, stop) = elements_with_indices

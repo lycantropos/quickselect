@@ -1,8 +1,10 @@
-from typing import MutableSequence, Tuple
+from __future__ import annotations
+
+from typing import Any, MutableSequence
 
 from hypothesis import given
 
-from quickselect.hints import Domain, KeyFunction
+from quickselect.hints import Key
 from quickselect.hoare import nth_smallest
 
 from tests import strategies
@@ -10,7 +12,7 @@ from tests import strategies
 
 @given(strategies.elements_lists_with_index, strategies.keys)
 def test_properties(
-    elements_with_index: Tuple[MutableSequence[Domain], int], key: KeyFunction
+    elements_with_index: tuple[MutableSequence[Any], int], key: Key[Any] | None
 ) -> None:
     elements, index = elements_with_index
 
@@ -21,7 +23,7 @@ def test_properties(
 
 
 @given(strategies.elements_lists, strategies.keys)
-def test_first(elements: MutableSequence[Domain], key: KeyFunction) -> None:
+def test_first(elements: MutableSequence[Any], key: Key[Any] | None) -> None:
     result = nth_smallest(elements, 0, key=key)
 
     assert result == (min(elements) if key is None else min(elements, key=key))

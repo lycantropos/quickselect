@@ -1,47 +1,41 @@
+from __future__ import annotations
+
 from decimal import Decimal
 from fractions import Fraction
 from functools import partial
 from operator import gt, lt
-from typing import List, Tuple
+from typing import Any, Callable
 
-from hypothesis import strategies
+from hypothesis import strategies as _st
 
 from quickselect.hints import Domain
 
-from tests.utils import Strategy
-
-elements_strategies_factories = {
-    Decimal: partial(
-        strategies.decimals, allow_nan=False, allow_infinity=False
-    ),
-    float: partial(strategies.floats, allow_nan=False, allow_infinity=False),
-    Fraction: strategies.fractions,
-    int: strategies.integers,
+elements_strategies_factories: dict[
+    type[Any], Callable[[], _st.SearchStrategy[Any]]
+] = {
+    Decimal: partial(_st.decimals, allow_nan=False, allow_infinity=False),
+    float: partial(_st.floats, allow_nan=False, allow_infinity=False),
+    Fraction: _st.fractions,
+    int: _st.integers,
 }
-elements_strategies = strategies.sampled_from(
+elements_strategies = _st.sampled_from(
     [factory() for factory in elements_strategies_factories.values()]
 )
-elements_lists = elements_strategies.flatmap(
-    partial(strategies.lists, min_size=1)
-)
+elements_lists = elements_strategies.flatmap(partial(_st.lists, min_size=1))
 
 
 def to_numbers_lists_with_index(
-    elements: List[Domain],
-) -> Strategy[Tuple[List[Domain], int]]:
-    return strategies.tuples(
-        strategies.just(elements), strategies.integers(0, len(elements) - 1)
-    )
+    elements: list[Domain],
+) -> _st.SearchStrategy[tuple[list[Domain], int]]:
+    return _st.tuples(_st.just(elements), _st.integers(0, len(elements) - 1))
 
 
 def to_numbers_lists_with_indices_triplet(
-    elements: List[Domain],
-) -> Strategy[Tuple[List[Domain], Tuple[int, int, int]]]:
-    return strategies.tuples(
-        strategies.just(elements),
-        strategies.lists(
-            strategies.integers(0, len(elements) - 1), min_size=3, max_size=3
-        )
+    elements: list[Domain],
+) -> _st.SearchStrategy[tuple[list[Domain], tuple[int, int, int]]]:
+    return _st.tuples(
+        _st.just(elements),
+        _st.lists(_st.integers(0, len(elements) - 1), min_size=3, max_size=3)
         .map(sorted)
         .map(tuple),
     )
@@ -57,5 +51,5 @@ def identity(value: Domain) -> Domain:
     return value
 
 
-comparators = strategies.sampled_from([gt, lt])
-keys = strategies.sampled_from([identity, abs]) | strategies.none()
+comparators = _st.sampled_from([gt, lt])
+keys = _st.sampled_from([identity, abs]) | _st.none()
