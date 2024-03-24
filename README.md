@@ -32,14 +32,9 @@ git clone https://github.com/lycantropos/quickselect.git
 cd quickselect
 ```
 
-Install dependencies
-```bash
-python -m pip install -r requirements.txt
-```
-
 Install
 ```bash
-python setup.py install
+python -m pip install -e .
 ```
 
 Development
@@ -88,9 +83,9 @@ This will set version to `major.minor.patch`.
 
 ### Running tests
 
-Install dependencies
+Install with dependencies
 ```bash
-python -m pip install -r requirements-tests.txt
+python -m pip install -e .[tests]
 ```
 
 Plain
