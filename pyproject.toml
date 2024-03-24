@@ -13,8 +13,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy"
 ]
 requires-python = ">=3.8"
 dependencies = [
@@ -74,6 +72,7 @@ ignore = [
 
 [tool.ruff.lint.isort]
 case-sensitive = true
+combine-as-imports = true
 known-local-folder = ["tests"]
 relative-imports-order = "closest-to-furthest"
 split-on-trailing-comma = false
