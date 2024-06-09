@@ -206,6 +206,7 @@ def _presort(
                 ),
                 comparator,
             )
+        candidate, pivot = sequence[n], keys[n]
         sequence[start], sequence[n] = candidate, sequence[start]
         if comparator(pivot, keys[stop]):
             sequence[start], sequence[stop] = sequence[stop], candidate
@@ -227,7 +228,6 @@ def _presort(
             start = pivot_index + 1
         if pivot_index >= n:
             stop = pivot_index - 1
-        candidate, pivot = sequence[n], keys[n]
 
 
 def _partition(
