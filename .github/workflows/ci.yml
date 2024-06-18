@@ -37,7 +37,7 @@ jobs:
         python_version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
         platform: [
           {
-            os: 'macos-latest',
+            os: 'macos-13',
             python_architecture: 'x64'
           },
           {
@@ -55,19 +55,19 @@ jobs:
         ]
         include:
           - python_version: 'pypy-3.8'
-            platform: { os: 'macos-latest', python_architecture: 'x64' }
+            platform: { os: 'macos-13', python_architecture: 'x64' }
           - python_version: 'pypy-3.8'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.8'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.9'
-            platform: { os: 'macos-latest', python_architecture: 'x64' }
+            platform: { os: 'macos-13', python_architecture: 'x64' }
           - python_version: 'pypy-3.9'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.9'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.10'
-            platform: { os: 'macos-latest', python_architecture: 'x64' }
+            platform: { os: 'macos-13', python_architecture: 'x64' }
           - python_version: 'pypy-3.10'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.10'
@@ -135,7 +135,7 @@ jobs:
         python_version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
         platform: [
           {
-            os: 'macos-latest',
+            os: 'macos-13',
             python_architecture: 'x64'
           },
           {
@@ -153,19 +153,19 @@ jobs:
         ]
         include:
           - python_version: 'pypy-3.8'
-            platform: { os: 'macos-latest', python_architecture: 'x64' }
+            platform: { os: 'macos-13', python_architecture: 'x64' }
           - python_version: 'pypy-3.8'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.8'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.9'
-            platform: { os: 'macos-latest', python_architecture: 'x64' }
+            platform: { os: 'macos-13', python_architecture: 'x64' }
           - python_version: 'pypy-3.9'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.9'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.10'
-            platform: { os: 'macos-latest', python_architecture: 'x64' }
+            platform: { os: 'macos-13', python_architecture: 'x64' }
           - python_version: 'pypy-3.10'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-3.10'
