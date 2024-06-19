@@ -7,7 +7,7 @@ services:
       args:
         - IMAGE_NAME=${CPYTHON_IMAGE_NAME}
         - IMAGE_VERSION=${CPYTHON_IMAGE_VERSION}
-    image: lycantropos/quickselect-cpython:0.2.1-alpha
+    image: lycantropos/quickselect-cpython:0.2.1
     volumes:
       - ./pyproject.toml:/opt/quickselect/pyproject.toml
       - ./quickselect:/opt/quickselect/quickselect
