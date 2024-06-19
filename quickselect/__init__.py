@@ -1,3 +1,3 @@
 """Select algorithms implementation."""
 
-__version__ = '0.2.2-alpha'
+__version__ = '0.2.2'
