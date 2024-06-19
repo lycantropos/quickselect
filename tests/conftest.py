@@ -6,10 +6,12 @@ from hypothesis import settings
 
 on_ci = bool(os.getenv('CI', False))
 max_examples = settings.default.max_examples
+max_examples = 10**4
 settings.register_profile(
     'default',
     deadline=(timedelta(hours=1) / max_examples if on_ci else None),
     max_examples=max_examples,
+    verbosity=2,
 )
 
 

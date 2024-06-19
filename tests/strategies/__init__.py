@@ -1,9 +1,9 @@
 from . import literals
 
-comparators = literals.comparators
-elements_lists = literals.elements_lists
-elements_lists_with_index = literals.elements_lists_with_index
-elements_lists_with_indices_triplets = (
-    literals.elements_lists_with_indices_triplets
+comparator_strategy = literals.comparator_strategy
+element_list_strategy = literals.element_list_strategy
+element_list_with_index_strategy = literals.element_list_with_index_strategy
+element_list_with_index_triplet_strategy = (
+    literals.element_list_with_index_triplet_strategy
 )
-keys = literals.keys
+key_strategy = literals.key_strategy
