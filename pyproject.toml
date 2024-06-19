@@ -1,6 +1,6 @@
 [project]
 name = "quickselect"
-description = "AZ language."
+description = "Select algorithms implementation."
 authors = [{ name = "Azat Ibrakov", email = "azatibrakov@gmail.com" }]
 readme = "README.md"
 license = { file = "LICENSE" }
