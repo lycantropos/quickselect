@@ -18,21 +18,18 @@ element_strategy_factories: dict[
     Fraction: _st.fractions,
     Decimal: partial(_st.decimals, allow_nan=False, allow_infinity=False),
 }
-integers = _st.integers(-1_000, 1_000)
+MAX_RANGE_ENDPOINT = 1_000
 
 
-def to_range(endpoints: tuple[int, int]) -> range:
-    return range(*endpoints)
+def to_range(start_with_increment: tuple[int, int]) -> range:
+    start, increment = start_with_increment
+    return range(start, start + increment)
 
 
-def to_sorted_pair(pair: tuple[int, int]) -> tuple[int, int]:
-    first, second = pair
-    return (second, first) if second < first else pair
-
-
-range_strategy = (
-    _st.tuples(integers, integers).map(to_sorted_pair).map(to_range)
-)
+range_strategy = _st.tuples(
+    _st.integers(-MAX_RANGE_ENDPOINT, MAX_RANGE_ENDPOINT),
+    _st.integers(0, MAX_RANGE_ENDPOINT),
+).map(to_range)
 element_list_strategy = _st.one_of(
     [
         _st.lists(factory(), min_size=1)
