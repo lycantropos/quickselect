@@ -28,7 +28,7 @@ def to_range(start_with_increment: tuple[int, int]) -> range:
 
 range_strategy = _st.tuples(
     _st.integers(-MAX_RANGE_ENDPOINT, MAX_RANGE_ENDPOINT),
-    _st.integers(0, MAX_RANGE_ENDPOINT),
+    _st.integers(1, MAX_RANGE_ENDPOINT),
 ).map(to_range)
 element_list_strategy = _st.one_of(
     [
