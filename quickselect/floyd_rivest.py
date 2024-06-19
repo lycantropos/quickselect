@@ -183,7 +183,6 @@ def _presort(
     stop: int,
     comparator: Comparator,
 ) -> None:
-    candidate, pivot = sequence[n], keys[n]
     while start < stop:
         if stop - start > 600:
             range_size = stop - start + 1
