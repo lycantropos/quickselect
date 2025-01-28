@@ -44,7 +44,7 @@ source = ["quickselect"]
 strict = true
 
 [tool.pytest.ini_options]
-addopts = "--verbose -s --hypothesis-profile=default"
+addopts = "--verbose -s"
 
 [tool.ruff]
 line-length = 79
