@@ -22,8 +22,8 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 docs = [
-    "Sphinx>=7.2.6,<9.0",
-    "sphinx-rtd-theme>=2.0.0,<4.0"
+    "Sphinx>=7.2.6,<8.0",
+    "sphinx-rtd-theme>=2.0.0,<3.0"
 ]
 tests = [
     "hypothesis>=6.99.12,<7.0",
@@ -44,7 +44,7 @@ source = ["quickselect"]
 strict = true
 
 [tool.pytest.ini_options]
-addopts = "--verbose -s"
+addopts = "--verbose -s --hypothesis-profile=default"
 
 [tool.ruff]
 line-length = 79

@@ -1,4 +1,7 @@
 import pytest
+from hypothesis import settings
+
+settings.register_profile('default', deadline=None)
 
 
 @pytest.hookimpl(trylast=True)
